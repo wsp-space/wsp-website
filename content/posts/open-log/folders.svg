@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
   <rect width="800" height="460" fill="#f6f1e7"/>
   <rect x="28" y="28" width="744" height="404" fill="none" stroke="#1c1915" stroke-opacity="0.28"/>
   <text x="48" y="68" fill="#d84a32" font-family="sans-serif" font-size="14" letter-spacing="2">CONTENT / POSTS</text>
@@ -10,6 +10,6 @@
   <polygon points="470,230 520,200 520,260" fill="#e0a84a"/>
   <rect x="540" y="140" width="190" height="180" fill="#17191e"/>
   <text x="560" y="190" fill="#e0a84a" font-family="sans-serif" font-size="14">LOG</text>
-  <text x="560" y="230" fill="#f6f1e7" font-family="sans-serif" font-size="18">;Õ2</text>
+  <text x="560" y="230" fill="#f6f1e7" font-family="sans-serif" font-size="18">Activity log</text>
   <rect x="560" y="252" width="140" height="36" fill="#f6f1e7"/>
 </svg>

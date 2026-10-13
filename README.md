@@ -2,7 +2,7 @@
 
 ハイブリッドロケットと CanSat の活動を公開するサイトです。Next.js の静的書き出しを GitHub Pages に載せます。
 
-公開先は [https://wsp-space.github.io/wsp-website/](https://wsp-space.github.io/wsp-website/) です。
+公開先は [https://www.wsp-wakayama.space/](https://www.wsp-wakayama.space/) です。
 
 ## ローカルで見る
 
@@ -11,17 +11,7 @@ npm install
 npm run dev
 ```
 
-本番と同じパスで確認するときは、ビルド前に環境変数を付けます。
-
-```bash
-# macOS / Linux
-NEXT_PUBLIC_BASE_PATH=/wsp-website npm run build
-
-# PowerShell
-$env:NEXT_PUBLIC_BASE_PATH="/wsp-website"; npm run build
-```
-
-変数なしの `npm run build` は、ローカルの `out/` をルートとしてプレビューするとき用です。
+`npm run build` の成果物はサイトルート向けです。`main` へ push すると GitHub Actions が GitHub Pages を更新します。カスタムドメインは `public/CNAME` に書いてあります。
 
 ## 活動記録を足す
 

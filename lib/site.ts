@@ -3,7 +3,7 @@ export const site = {
   title: 'WSP 宇宙開発プロジェクト',
   description:
     'ハイブリッドロケットと CanSat を、学生の手で設計・製作・試験まで進める宇宙開発プロジェクトです。',
-  url: 'https://wsp-space.github.io/wsp-website',
+  url: 'https://www.wsp-wakayama.space',
   repo: 'https://github.com/wsp-space/wsp-website',
 }
 

@@ -14,10 +14,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: site.title,
     description: site.description,
-    url: site.url,
+    url: '/',
     siteName: site.name,
     locale: 'ja_JP',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: site.title,
+    description: site.description,
   },
 }
 

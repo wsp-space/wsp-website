@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPost, getPosts } from '@/lib/content'
-import { formatDate, githubEditUrl } from '@/lib/site'
+import { formatDate } from '@/lib/site'
 
 export const dynamicParams = false
 
@@ -39,9 +39,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </div>
       <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
       <p className="edit-link">
-        <Link href="/blog">記録一覧へ</Link>
-        {' · '}
-        <a href={githubEditUrl('posts', post.slug)}>GitHubでこの記事を編集</a>
+        <Link href="/blog">ブログ一覧へ</Link>
       </p>
     </article>
   )

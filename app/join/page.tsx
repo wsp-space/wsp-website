@@ -7,10 +7,11 @@ export const metadata: Metadata = {
 }
 
 const roles = [
-  { name: '構造', body: '図面、加工、組立。手を動かす時間が一番長い席です。' },
-  { name: '推進', body: '供給系と燃焼器、地上試験の手順。安全側の確認を文章にします。' },
-  { name: '電装', body: 'センサ、点火制御、通信。基板とケーブルの現物を残します。' },
-  { name: 'ソフト', body: '搭載ソフト、地上局、試験ログの整理。CanSat 側の比重が大きいです。' },
+  { name: '構造', body: 'ロケットの機体と、気球のペイロード外殻。図面、加工、組立。手を動かす時間が一番長い席です。' },
+  { name: '推進', body: 'ハイブリッドロケットの供給系と燃焼器、地上燃焼試験の手順。安全側の確認を文章にします。' },
+  { name: '電装', body: 'センサ、点火制御、GPS、無線。ロケットと気球の両方に載る基板を作ります。' },
+  { name: 'ソフト', body: '搭載ソフト、地上局、追跡と試験ログの整理。気球の位置を最後まで追う席でもあります。' },
+  { name: '放球・回収', body: '気球のガス充填と放球手順、落下予測、回収の段取り。射場と車の手配もここです。' },
   { name: '記録', body: '写真、測定値、中止の理由。このサイトの記事を書く席でもあります。' },
 ]
 
@@ -38,14 +39,15 @@ export default function JoinPage() {
       </section>
 
       <section className="block">
-        <h2>連絡</h2>
+        <h2>申し込み</h2>
+        <p>参加の申し込みは、下のフォームから受け付けています。</p>
         <p>
-          メールアドレスはまだ置いていません。用件はリポジトリの Issues に書いてください。参加の相談、活動記録の訂正、写真の差し替え、どれもそこで受けます。
-        </p>
-        <p>
-          <a className="btn btn-solid" href={`${site.repo}/issues`}>
-            Issues を開く
+          <a className="btn btn-brass" href={site.joinForm} target="_blank" rel="noopener noreferrer">
+            申し込みフォームを開く
           </a>
+        </p>
+        <p className="form-note">
+          ※ このフォームは和歌山大学のアカウント（Microsoft 365）でサインインしたときだけ回答できます。個人のアカウントでは開けないので、大学のアカウントに切り替えてから開いてください。
         </p>
       </section>
     </div>

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { PersonMessage } from '@/components/PersonMessage'
 import { getProject, getProjects } from '@/lib/content'
-import { githubEditUrl } from '@/lib/site'
 
 export const dynamicParams = false
 
@@ -24,17 +24,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   if (!project) notFound()
 
   return (
-    <article className="article">
-      <p className="eyebrow">{project.kicker ?? 'Project'}</p>
-      <h1>{project.title}</h1>
-      <div className="article-meta">
-        {project.status ? <span className="status">{project.status}</span> : null}
-        <Link href="/projects">プロジェクト一覧</Link>
-      </div>
+    <article className="article article-project">
+      <header className="project-head">
+        <div>
+          <p className="eyebrow">{project.kicker ?? 'Project'}</p>
+          <h1>{project.title}</h1>
+          <p className="lede">{project.excerpt}</p>
+          <div className="article-meta">
+            {project.status ? <span className="status">{project.status}</span> : null}
+            <Link href="/projects">活動紹介</Link>
+          </div>
+        </div>
+        {project.cover ? <img src={project.cover} alt="" className="project-cover" /> : null}
+      </header>
       <div className="prose" dangerouslySetInnerHTML={{ __html: project.html }} />
-      <p className="edit-link">
-        <a href={githubEditUrl('projects', project.slug)}>GitHubでこのページを編集</a>
-      </p>
+      {project.pm ? (
+        <PersonMessage id="pm-message" eyebrow="Message" title="PMからのメッセージ" person={project.pm} />
+      ) : null}
     </article>
   )
 }

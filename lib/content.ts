@@ -7,9 +7,13 @@ import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import { visit } from 'unist-util-visit'
-import { media, resolveMedia } from '@/lib/site'
+import { media, resolveMedia, type Person } from '@/lib/site'
 
-export type Collection = 'posts' | 'projects'
+export type Collection = 'posts' | 'projects' | 'archive'
+
+export type ArchiveCategory = 'rocket' | 'balloon'
+
+export type Fact = { label: string; value: string }
 
 export type Entry = {
   slug: string
@@ -21,6 +25,11 @@ export type Entry = {
   status?: string
   kicker?: string
   order: number
+  pm?: Person
+  category?: ArchiveCategory
+  year?: number
+  period?: string
+  facts: Fact[]
   html: string
 }
 
@@ -47,6 +56,42 @@ function asTags(value: unknown) {
 
 function asOrder(value: unknown) {
   return typeof value === 'number' && Number.isFinite(value) ? value : 100
+}
+
+function asYear(value: unknown) {
+  if (typeof value === 'number' && Number.isFinite(value)) return value
+  if (typeof value === 'string' && /^\d{4}/.test(value)) return Number(value.slice(0, 4))
+  return undefined
+}
+
+function asCategory(value: unknown): ArchiveCategory | undefined {
+  return value === 'rocket' || value === 'balloon' ? value : undefined
+}
+
+function asFacts(value: unknown): Fact[] {
+  if (!Array.isArray(value)) return []
+  return value
+    .filter((item): item is Record<string, unknown> => typeof item === 'object' && item !== null)
+    .map((item) => ({ label: asString(item.label), value: String(item.value ?? '') }))
+    .filter((item) => item.label && item.value)
+}
+
+function asPerson(value: unknown, collection: Collection, slug: string): Person | undefined {
+  if (typeof value !== 'object' || value === null) return undefined
+  const data = value as Record<string, unknown>
+  const name = asString(data.name)
+  if (!name) return undefined
+  const photo = asString(data.photo)
+  const message = asString(data.message)
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+  return {
+    name,
+    role: asString(data.role),
+    photo: photo ? media(resolveMedia(collection, slug, photo)) : undefined,
+    message,
+  }
 }
 
 function excerptFrom(markdown: string) {
@@ -105,12 +150,19 @@ async function loadCollection(collection: Collection): Promise<Entry[]> {
       status: asString(data.status) || undefined,
       kicker: asString(data.kicker) || undefined,
       order: asOrder(data.order),
+      pm: asPerson(data.pm, collection, entry.name),
+      category: asCategory(data.category),
+      year: asYear(data.year),
+      period: asYear(data.year) ? `${asYear(data.year)}年度` : undefined,
+      facts: asFacts(data.facts),
       html: await renderMarkdown(parsed.content, collection, entry.name),
     })
   }
 
   if (collection === 'projects') {
     documents.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title, 'ja'))
+  } else if (collection === 'archive') {
+    documents.sort((a, b) => (b.year ?? 0) - (a.year ?? 0) || a.title.localeCompare(b.title, 'ja'))
   } else {
     documents.sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title, 'ja'))
   }
@@ -136,4 +188,13 @@ export async function getPost(slug: string) {
 export async function getProject(slug: string) {
   const projects = await getProjects()
   return projects.find((project) => project.slug === slug)
+}
+
+export function getArchive() {
+  return readCollection('archive')
+}
+
+export async function getArchiveEntry(slug: string) {
+  const entries = await getArchive()
+  return entries.find((entry) => entry.slug === slug)
 }

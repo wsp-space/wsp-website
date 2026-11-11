@@ -12,6 +12,7 @@ export function ProjectCard({ project }: { project: Entry }) {
         </div>
         <h3>{project.title}</h3>
         <p>{project.excerpt}</p>
+        <span className="card-more">詳しく見る</span>
       </div>
     </Link>
   )

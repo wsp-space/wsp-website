@@ -1,53 +1,37 @@
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { PostRow } from '@/components/PostRow'
 import { ProjectCard } from '@/components/ProjectCard'
-import { RocketMark } from '@/components/RocketMark'
 import { getPosts, getProjects } from '@/lib/content'
-import { yearSteps } from '@/lib/site'
+import { media, yearSteps } from '@/lib/site'
 
 export default async function HomePage() {
   const [projects, posts] = await Promise.all([getProjects(), getPosts()])
+  const heroStyle = { '--hero-image': `url("${media('/hero.jpg')}")` } as CSSProperties
 
   return (
     <>
-      <section className="hero">
+      <section className="hero" style={heroStyle}>
         <div className="wrap hero-grid">
           <div>
             <p className="eyebrow light">Space development project</p>
             <h1>
-              図面から打上まで、
+              計画から打上まで、
               <br />
               自分たちの手で。
             </h1>
             <p className="lede">
-              WSPは、ハイブリッドロケットと CanSat を学生の手で設計・製作・試験するところまで進める宇宙開発プロジェクトです。機体、推進、電装を別々の依頼先に分けず、同じ作業台の上でつなげます。
+              WSPは、ハイブリッドロケットと成層圏気球を学生の手で設計・製作・試験するところまで進める宇宙開発プロジェクトです。
             </p>
             <div className="hero-actions">
               <Link href="/projects" className="btn btn-brass">
-                プロジェクトを見る
+                活動紹介を見る
               </Link>
               <Link href="/blog" className="btn btn-line">
-                活動記録
+                ブログ
               </Link>
             </div>
           </div>
-          <RocketMark />
-        </div>
-        <div className="wrap">
-          <dl className="nameplate">
-            <div>
-              <dt>つくるもの</dt>
-              <dd>ハイブリッドロケット / CanSat</dd>
-            </div>
-            <div>
-              <dt>進め方</dt>
-              <dd>設計、製作、試験、報告</dd>
-            </div>
-            <div>
-              <dt>記録</dt>
-              <dd>活動日誌を GitHub で公開</dd>
-            </div>
-          </dl>
         </div>
       </section>
 
@@ -56,7 +40,7 @@ export default async function HomePage() {
           <div className="section-head">
             <div>
               <p className="eyebrow">01 — Projects</p>
-              <h2>三つの作業台</h2>
+              <h2>ロケットと気球</h2>
             </div>
             <Link href="/projects" className="text-link">
               すべて見る
@@ -75,7 +59,7 @@ export default async function HomePage() {
           <div className="section-head">
             <div>
               <p className="eyebrow">02 — Cycle</p>
-              <h2>一年の回り方</h2>
+              <h2>プロジェクトの回り方</h2>
             </div>
           </div>
           <ol className="steps">
@@ -94,11 +78,11 @@ export default async function HomePage() {
         <div className="wrap">
           <div className="section-head">
             <div>
-              <p className="eyebrow">03 — Log</p>
-              <h2>活動記録</h2>
+              <p className="eyebrow">03 — Blog</p>
+              <h2>ブログ</h2>
             </div>
             <Link href="/blog" className="text-link">
-              記録一覧
+              ブログ一覧
             </Link>
           </div>
           <div className="log-list">
@@ -113,8 +97,8 @@ export default async function HomePage() {
         <div className="wrap join-inner">
           <div>
             <p className="eyebrow light">Join</p>
-            <h2>未経験でも、図面の横に座れる。</h2>
-            <p>切削もコードも、最初は隣で覚える前提です。経験の有無より、週のうち一度は作業に来ることを大事にしています。</p>
+            <h2>未経験でも、宇宙を目指せる</h2>
+            <p>問われるのは経験の有無よりもやる気です。一緒に宇宙を目指しませんか？</p>
           </div>
           <Link href="/join" className="btn btn-brass">
             参加の案内

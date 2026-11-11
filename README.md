@@ -1,6 +1,6 @@
 # WSP 宇宙開発プロジェクト
 
-ハイブリッドロケットと CanSat の活動を公開するサイトです。Next.js の静的書き出しを GitHub Pages に載せます。
+ハイブリッドロケットと成層圏気球の活動を公開するサイトです。Next.js の静的書き出しを GitHub Pages に載せます。
 
 公開先は [https://www.wsp-wakayama.space/](https://www.wsp-wakayama.space/) です。
 
@@ -47,7 +47,9 @@ tags:
 
 - 使える画像は JPEG、PNG、WebP、SVG です。
 - `draft: true` の記事と、名前が `_` で始まるフォルダは公開されません。雛形は `content/posts/_template` です。
-- プロジェクト紹介も同じ仕組みで、`content/projects/<名前>/index.md` に置きます。
+- プロジェクト紹介も同じ仕組みで、`content/projects/<名前>/index.md` に置きます。PM のメッセージは先頭の `pm:` に書きます。
+- 過去プロジェクトは `content/archive/<名前>/index.md` です。`category`（`rocket` か `balloon`）と `year` で並び、`facts` に打上日や高度などの表を、`pm` に PM のメッセージを書きます。書き方は `content/archive/sample-rocket-2025` を見てください。
+- 代表のメッセージは `lib/site.ts` の `representative` にあります。
 - 記事や画像を足したあとは、開発サーバーを入れ直してください。起動時に画像を `public/media` へコピーします。
 
 `main` へ push すると、GitHub Actions がビルドして Pages を更新します。

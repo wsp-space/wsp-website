@@ -8,7 +8,7 @@ export function PostRow({ post }: { post: Entry }) {
       <time className="log-date" dateTime={post.date}>
         {formatDate(post.date)}
       </time>
-      <span>
+      <span className="log-text">
         <span className="log-title">{post.title}</span>
         <span className="log-excerpt">{post.excerpt}</span>
       </span>

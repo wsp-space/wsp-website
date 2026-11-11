@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const root = process.cwd()
-const collections = ['posts', 'projects']
+const collections = ['posts', 'projects', 'archive']
 
 for (const name of collections) {
   const source = path.join(root, 'content', name)
